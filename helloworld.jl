@@ -56,10 +56,34 @@ with this logic:
 points_in_sphere = length(filter(x->x<1,d))
 points_in_cube = num_points
 
-pi_approx = 6*points_in_sphere/points_in_cube
+approximation = 6*(points_in_sphere)/(points_in_cube)
+print("Pi is approximately: ",approximation);
 
-@printf("Pi is approximately: %d",pi_approx);
+t = []
+for i in d
+    if i <= 1
+        push!(t, 1)
+    else
+        push!(t, 0)
+    end
+end
+
+
+pt = []
+xpt = []
+cnt = 0
+v = 0
+
+for i in t
+    global v += i
+    global cnt += 1
+    v2 = 6*v/cnt
+    push!(pt, v2)
+    push!(xpt, cnt)
+end
 
 
 #visualise results
-display(scatter3d(df.x, df.y, df.z, color=df.c, alpha = df.a, legend = false))
+display(scatter3d(df.x, df.y, df.z, color=df.c, alpha = df.a, legend = false, title = "Random Points Visualisation"))
+
+display(plot(xpt, pt, legend = false, title = "Pi Approximation", xlabel = "Number of Points", ylabel="Approximate Value of Pi"))
