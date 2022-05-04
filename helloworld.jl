@@ -17,9 +17,14 @@ d = []
 c = []
 a = []
 
+function distance(x,y,z)
+    d = (x^2 + y^2 + z^2)^0.5
+    return d
+end
+
 #populate distance, colour and opacity arrays
 for i in 1:length(x)
-    r = (x[i]^2 + y[i]^2 + z[i]^2)^0.5
+    r = distance(x[i],y[i],z[i])
     push!(d, r)
     if r <= 1
         push!(c, "red")
